@@ -1,0 +1,39 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.image_url %>);">
+  <div class="container">
+    <h1> <%= @list.name %> </h1>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="cards">
+    <% @list.bookmarks.each do | bookmark | %>
+      <div class="card-product">
+        <%= image_tag bookmark.movie.poster_url %>
+        <div class="card-product-infos">
+        <h2> <%= bookmark.movie.title %> (<%= bookmark.movie.rating %>)</h2>
+        <p><%= bookmark.comment %></p>
+        <p><%= link_to "Remove", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you Sure?"}, class: "text-danger" %></p>
+      </div>
+    </div>
+    <% end  %>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add a Movie to List</h5>
+            <%= simple_form_for [@list, @bookmark] do |f| %>
+              <%= f.association :movie, collection: Movie.all %>
+              <%= f.input :comment %>
+              <div class="d-grid">
+              <%= f.submit "Add Movie", class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

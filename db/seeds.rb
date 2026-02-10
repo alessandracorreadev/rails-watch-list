@@ -18,3 +18,4 @@ l1 = List.create!(name: "My Favorite movies")
 
 Bookmark.create!(list: l1, movie: m1, comment: "Muito bom!")
 Bookmark.create!(list: l1, movie: m3, comment: "okay. Muito bom!")
+
